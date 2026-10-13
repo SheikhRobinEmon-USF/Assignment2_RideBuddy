@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8e8">
+  <title>Ride Buddy | Florida Theme Park Ride Helper</title>
+  <script src="https://cdn.botpress.cloud/webchat/v3.7/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/10/13/01/20261013013146-WM51N1W9.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #183047;
+      --muted: #5d7080;
+      --coral: #ff705e;
+      --yellow: #ffc84a;
+      --blue: #63c8e8;
+      --green: #a8d978;
+      --paper: #fffdf8;
+      --line: #f0e8d8;
+      --shadow: 0 16px 42px rgba(39, 59, 74, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 7% 4%, rgba(255, 200, 74, 0.22), transparent 23rem),
+        radial-gradient(circle at 94% 22%, rgba(99, 200, 232, 0.17), transparent 25rem),
+        #fffaf0;
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 72px 24px 68px;
+      text-align: center;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      display: block;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .hero::before {
+      top: 18px;
+      left: max(3%, calc((100% - 1040px) / 2));
+      width: 82px;
+      height: 82px;
+      background: rgba(255, 112, 94, 0.13);
+    }
+
+    .hero::after {
+      right: max(4%, calc((100% - 1040px) / 2));
+      bottom: 28px;
+      width: 54px;
+      height: 54px;
+      background: rgba(168, 217, 120, 0.34);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      padding: 7px 13px;
+      border: 1px solid rgba(255, 112, 94, 0.23);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: #bd4a3c;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: #16344d;
+      font-size: clamp(3.5rem, 10vw, 6.3rem);
+      font-weight: 900;
+      letter-spacing: -0.075em;
+      line-height: 0.98;
+    }
+
+    .hero h1 span {
+      color: var(--coral);
+    }
+
+    .tagline {
+      max-width: 660px;
+      margin: 22px auto 0;
+      color: #40596d;
+      font-size: clamp(1.1rem, 2.6vw, 1.48rem);
+      font-weight: 600;
+    }
+
+    .hero-mark {
+      display: inline-grid;
+      width: 42px;
+      height: 42px;
+      margin-top: 28px;
+      place-items: center;
+      border: 2px solid white;
+      border-radius: 15px;
+      background: var(--yellow);
+      box-shadow: 0 5px 0 #e8a92d;
+      font-size: 1.35rem;
+      transform: rotate(-7deg);
+    }
+
+    main {
+      padding-bottom: 68px;
+    }
+
+    .intro {
+      max-width: 850px;
+      margin: 0 auto 58px;
+      padding: 28px 32px;
+      border: 1px solid rgba(230, 219, 198, 0.8);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: var(--shadow);
+      color: #40596d;
+      font-size: 1.05rem;
+      text-align: center;
+    }
+
+    .intro strong {
+      color: var(--ink);
+    }
+
+    section {
+      margin-top: 66px;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+
+    .section-kicker {
+      margin: 0 0 5px;
+      color: #bd654d;
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: #183047;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      letter-spacing: -0.045em;
+      line-height: 1.15;
+    }
+
+    .section-heading > p:last-child {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-card {
+      position: relative;
+      min-height: 190px;
+      padding: 25px 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--paper);
+      box-shadow: 0 9px 25px rgba(39, 59, 74, 0.06);
+    }
+
+    .step-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 17px;
+      place-items: center;
+      border-radius: 14px;
+      background: #fff0c8;
+      color: #8a5a00;
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .step-card:nth-child(2) .step-number {
+      background: #dff6fd;
+      color: #15718d;
+    }
+
+    .step-card:nth-child(3) .step-number {
+      background: #e8f5d8;
+      color: #477b25;
+    }
+
+    .step-card h3 {
+      margin: 0 0 7px;
+      font-size: 1.12rem;
+    }
+
+    .step-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .parks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .park-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--paper);
+      box-shadow: 0 9px 25px rgba(39, 59, 74, 0.055);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .park-card:hover,
+    .park-card:focus-within {
+      transform: translateY(-5px);
+      border-color: rgba(255, 112, 94, 0.42);
+      box-shadow: 0 18px 34px rgba(39, 59, 74, 0.13);
+    }
+
+    .park-heading {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 19px 21px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(110deg, #fff5d8, #fffdf8 75%);
+    }
+
+    .park-card:nth-child(3n + 2) .park-heading {
+      background: linear-gradient(110deg, #e8f8fc, #fffdf8 75%);
+    }
+
+    .park-card:nth-child(3n) .park-heading {
+      background: linear-gradient(110deg, #eff7e4, #fffdf8 75%);
+    }
+
+    .park-icon {
+      display: grid;
+      flex: 0 0 44px;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 3px 12px rgba(39, 59, 74, 0.08);
+      font-size: 1.35rem;
+    }
+
+    .park-heading h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
+
+    .ride-count {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .ride-list {
+      margin: 0;
+      padding: 0 21px;
+      list-style: none;
+    }
+
+    .ride {
+      padding: 16px 0;
+    }
+
+    .ride + .ride {
+      border-top: 1px dashed #e9e2d4;
+    }
+
+    .ride-name {
+      margin: 0 0 7px;
+      color: #203b51;
+      font-size: 0.95rem;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .ride-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .detail-pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f3f6f7;
+      color: #536776;
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .detail-pill.height {
+      background: #fff0e9;
+      color: #a54e37;
+    }
+
+    .detail-pill.no-height {
+      background: #eaf5df;
+      color: #477b25;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .example {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 76px;
+      padding: 17px 20px;
+      border: 1px solid #f0e4c7;
+      border-radius: 18px;
+      background: #fffdf8;
+      color: #354f62;
+      font-size: 0.96rem;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(39, 59, 74, 0.045);
+    }
+
+    .example span {
+      flex: 0 0 auto;
+      font-size: 1.2rem;
+    }
+
+    .reminder {
+      max-width: 900px;
+      margin: 48px auto 0;
+      padding: 18px 22px;
+      border: 1px solid #f2dda3;
+      border-radius: 17px;
+      background: #fff6d9;
+      color: #675423;
+      text-align: center;
+    }
+
+    .reminder strong {
+      color: #463710;
+    }
+
+    footer {
+      padding: 27px 20px;
+      border-top: 1px solid rgba(230, 219, 198, 0.85);
+      background: rgba(255, 255, 255, 0.57);
+      color: #607282;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 700px) {
+      .page-shell {
+        width: min(100% - 28px, 560px);
+      }
+
+      .hero {
+        padding: 57px 12px 46px;
+      }
+
+      .hero::before {
+        left: -23px;
+      }
+
+      .hero::after {
+        right: -10px;
+      }
+
+      .intro {
+        margin-bottom: 44px;
+        padding: 22px 20px;
+        font-size: 0.98rem;
+        text-align: left;
+      }
+
+      section {
+        margin-top: 52px;
+      }
+
+      .steps,
+      .parks-grid,
+      .examples {
+        grid-template-columns: 1fr;
+      }
+
+      .step-card {
+        min-height: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow"><span aria-hidden="true">🎡</span> Your family ride finder</p>
+    <h1>Ride <span>Buddy</span></h1>
+    <p class="tagline">Find the rides your child can go on, before you get to the park.</p>
+    <span class="hero-mark" aria-hidden="true">🎢</span>
+  </header>
+
+  <main class="page-shell">
+    <p class="intro">
+      <strong>Ride Buddy is an AI assistant built with Botpress Studio.</strong>
+      Parents can type their child’s height in inches or centimeters, and the bot checks it against each ride’s minimum height to help find a great day-out fit.
+    </p>
+
+    <section aria-labelledby="how-heading">
+      <div class="section-heading">
+        <p class="section-kicker">Easy as 1, 2, 3</p>
+        <h2 id="how-heading">How it works</h2>
+        <p>A quick height check helps you plan the fun before you arrive.</p>
+      </div>
+      <div class="steps">
+        <article class="step-card">
+          <div class="step-number" aria-hidden="true">1</div>
+          <h3>Open the chat</h3>
+          <p>Tap the chat bubble in the bottom right corner to start talking with Ride Buddy.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-number" aria-hidden="true">2</div>
+          <h3>Share your plan</h3>
+          <p>Type your child’s height and tell the bot which park you’re visiting.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-number" aria-hidden="true">3</div>
+          <h3>Find your rides</h3>
+          <p>Get a helpful list of rides your child is tall enough to ride.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="parks-heading">
+      <div class="section-heading">
+        <p class="section-kicker">A little something for every thrill level</p>
+        <h2 id="parks-heading">What Ride Buddy knows</h2>
+        <p>27 popular rides across 9 Florida theme parks, with height, speed, ride type, and opening year.</p>
+      </div>
+
+      <div class="parks-grid">
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🏰</span>
+            <div><h3>Magic Kingdom</h3><span class="ride-count">4 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">TRON Lightcycle / Run</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 48 in</span><span class="detail-pill">59.3 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2023</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Seven Dwarfs Mine Train</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 38 in</span><span class="detail-pill">34 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2014</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Space Mountain</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 44 in</span><span class="detail-pill">27 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 1975</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Big Thunder Mountain Railroad</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 38 in</span><span class="detail-pill">35 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 1980</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🌐</span>
+            <div><h3>EPCOT</h3><span class="ride-count">3 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Guardians of the Galaxy: Cosmic Rewind</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 42 in</span><span class="detail-pill">60 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2022</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Test Track</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 40 in</span><span class="detail-pill">65 mph</span><span class="detail-pill">Slot car ride</span><span class="detail-pill">Opened 1999</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Remy’s Ratatouille Adventure</p>
+              <div class="ride-details"><span class="detail-pill no-height">No height minimum</span><span class="detail-pill">Not speed-rated</span><span class="detail-pill">Dark ride</span><span class="detail-pill">Opened 2021</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🎬</span>
+            <div><h3>Disney’s Hollywood Studios</h3><span class="ride-count">3 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Star Wars: Rise of the Resistance</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 40 in</span><span class="detail-pill">Not speed-rated</span><span class="detail-pill">Dark ride</span><span class="detail-pill">Opened 2019</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Slinky Dog Dash</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 38 in</span><span class="detail-pill">40 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2018</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">The Twilight Zone Tower of Terror</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 40 in</span><span class="detail-pill">Not speed-rated</span><span class="detail-pill">Drop ride</span><span class="detail-pill">Opened 1994</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🌿</span>
+            <div><h3>Disney’s Animal Kingdom</h3><span class="ride-count">3 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Avatar Flight of Passage</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 44 in</span><span class="detail-pill">Not speed-rated</span><span class="detail-pill">Flight simulator</span><span class="detail-pill">Opened 2017</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Expedition Everest</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 44 in</span><span class="detail-pill">50 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2006</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Na’vi River Journey</p>
+              <div class="ride-details"><span class="detail-pill no-height">No height minimum</span><span class="detail-pill">Not speed-rated</span><span class="detail-pill">Water ride</span><span class="detail-pill">Opened 2017</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🎥</span>
+            <div><h3>Universal Studios Florida</h3><span class="ride-count">2 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Revenge of the Mummy</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 48 in</span><span class="detail-pill">40 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2004</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Harry Potter and the Escape from Gringotts</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 42 in</span><span class="detail-pill">Not speed-rated</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2014</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🦖</span>
+            <div><h3>Islands of Adventure</h3><span class="ride-count">3 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Jurassic World VelociCoaster</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 51 in</span><span class="detail-pill">70 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2021</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Hagrid’s Magical Creatures Motorbike Adventure</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 48 in</span><span class="detail-pill">50 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2019</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">The Incredible Hulk Coaster</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">67 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 1999</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🌌</span>
+            <div><h3>Epic Universe</h3><span class="ride-count">1 ride</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Stardust Racers</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 48 in</span><span class="detail-pill">62 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2025</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🐬</span>
+            <div><h3>SeaWorld Orlando</h3><span class="ride-count">4 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Mako</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">73 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2016</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Pipeline: The Surf Coaster</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">60 mph</span><span class="detail-pill">Launched coaster</span><span class="detail-pill">Opened 2023</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Kraken</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">65 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2000</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Manta</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">56 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2009</span></div>
+            </li>
+          </ul>
+        </article>
+
+        <article class="park-card">
+          <div class="park-heading">
+            <span class="park-icon" aria-hidden="true">🐆</span>
+            <div><h3>Busch Gardens Tampa Bay</h3><span class="ride-count">4 rides</span></div>
+          </div>
+          <ul class="ride-list">
+            <li class="ride">
+              <p class="ride-name">Iron Gwazi</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 48 in</span><span class="detail-pill">76 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2022</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">SheiKra</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">70 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2005</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Montu</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 54 in</span><span class="detail-pill">60 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 1996</span></div>
+            </li>
+            <li class="ride">
+              <p class="ride-name">Phoenix Rising</p>
+              <div class="ride-details"><span class="detail-pill height">Min. 42 in</span><span class="detail-pill">44 mph</span><span class="detail-pill">Roller coaster</span><span class="detail-pill">Opened 2024</span></div>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="try-heading">
+      <div class="section-heading">
+        <p class="section-kicker">Your next question could be</p>
+        <h2 id="try-heading">Try asking</h2>
+        <p>Ask in your own words, or get started with one of these.</p>
+      </div>
+      <div class="examples">
+        <div class="example"><span aria-hidden="true">💬</span>“My son is 44 inches tall. What can he ride at Magic Kingdom?”</div>
+        <div class="example"><span aria-hidden="true">💬</span>“My daughter is 110 cm. Can she ride Expedition Everest?”</div>
+        <div class="example"><span aria-hidden="true">💬</span>“What is the fastest ride in Florida and how tall do you need to be?”</div>
+        <div class="example"><span aria-hidden="true">💬</span>“Which rides have no height requirement?”</div>
+      </div>
+    </section>
+
+    <aside class="reminder">
+      <strong>One little reminder:</strong> height requirements can change, so always confirm in the park’s official app before you ride.
+    </aside>
+  </main>
+
+  <footer>
+    <p>Built by Sheikh Robin Emon for ISM 6225 at the University of South Florida.</p>
+  </footer>
+</body>
+</html>
